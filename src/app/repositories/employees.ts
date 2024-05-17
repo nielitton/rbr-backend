@@ -10,8 +10,12 @@ class EmployeesRepository {
         return await Employee.findOne({ name: name })
     }
 
-    async read(): Promise<IEmployee[]> {
-        return await Employee.find()
+    async read(sorted: boolean | undefined): Promise<IEmployee[]> {
+        if(sorted) {
+            return await Employee.find().sort({ createdAt: 1 })
+        } else {
+            return await Employee.find().sort({ createdAt: -1 })
+        }
     }
 
     async readOne(id: string): Promise<IEmployee | null> {

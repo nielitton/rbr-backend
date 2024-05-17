@@ -27,7 +27,9 @@ class EmployeeController {
 
     async findMany(req: Request, res: Response) {
         try {
-            const response = await this.employeeService.findMany()
+            const sorted = req.query.sorted as boolean | undefined
+
+            const response = await this.employeeService.findMany(sorted)
             res.status(200).json(response)
         } catch (error) {
             res.status(400).json({
@@ -58,8 +60,8 @@ class EmployeeController {
             
             res.status(200).json({ message: "Employe deleted", employee: employee })
         } catch (error) {
-            if (error instanceof Error) {
-                res.status(404).json({ message: error.message });
+            if (error instanceof AppError) {
+                res.status(error.statusCode).json({ message: error.message });
             } else {
                 // Se não for uma instância de Error, retorne um erro genérico
                 res.status(500).json({ message: "Internal Server Error" });
@@ -71,25 +73,13 @@ class EmployeeController {
         try {
             const id = req.params.id;
 
-            if (!req.body.actions || !req.body.charge || !req.body.department || !req.body.name) {
-                throw new Error("Todos os campos (actions, charge, department, name) são obrigatórios");
-            }
-
-            const newEmployee: IEmployee = {
-                actions: req.body.actions,
-                charge: req.body.charge,
-                department: req.body.department,
-                name: req.body.name
-            }
-
-            const employee = await this.employeeService.update(id, newEmployee);
+            const employee = await this.employeeService.update(id, req.body);
 
             res.status(200).json({ message: "Funcionário atualizado", employee: employee });
         } catch (error) {
-            if (error instanceof Error) {
-                res.status(404).json({ message: error.message });
+            if (error instanceof AppError) {
+                res.status(error.statusCode).json({ message: error.message });
             } else {
-                // Se não for uma instância de Error, retorne um erro genérico
                 res.status(500).json({ message: "Internal Server Error" });
             }
         }

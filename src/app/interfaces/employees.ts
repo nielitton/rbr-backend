@@ -3,4 +3,5 @@ export interface IEmployee {
     department: string;
     actions: string;
     charge: string;
+    createdAt: string;
 }
