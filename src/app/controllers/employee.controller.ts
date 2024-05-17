@@ -1,8 +1,6 @@
-import { ErrorRequestHandler, Request, Response } from 'express';
+import { Request, Response } from 'express';
 
 import EmployeesService from "../services/employee";
-import { IEmployee } from '../interfaces/employees';
-import { Error } from 'mongoose';
 import AppError from '../errors/AppError';
 
 class EmployeeController {
@@ -58,7 +56,7 @@ class EmployeeController {
             const id = req.params.id
             const employee = await this.employeeService.deleteOne(id)
             
-            res.status(200).json({ message: "Employe deleted", employee: employee })
+            res.status(200).json({ message: "Employe Deleted", employee: employee })
         } catch (error) {
             if (error instanceof AppError) {
                 res.status(error.statusCode).json({ message: error.message });
@@ -75,7 +73,7 @@ class EmployeeController {
 
             const employee = await this.employeeService.update(id, req.body);
 
-            res.status(200).json({ message: "Funcionário atualizado", employee: employee });
+            res.status(200).json({ message: "Employee Updated", employee: employee });
         } catch (error) {
             if (error instanceof AppError) {
                 res.status(error.statusCode).json({ message: error.message });

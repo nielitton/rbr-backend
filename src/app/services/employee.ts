@@ -13,6 +13,10 @@ class EmployeeService {
     async create(data: IEmployee): Promise<any> {
         const exists = await this.newEmployeeRepository.readByName(data.name)
 
+        if(!data.actions || !data.charge || !data.department || !data.name) {
+            throw new AppError("You need to pass (name, charge, department and actions)", 400)
+        }
+
         if(exists) {
             throw new AppError("Employee alreay exists", 400)
         }
