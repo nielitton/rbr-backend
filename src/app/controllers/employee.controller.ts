@@ -25,7 +25,7 @@ class EmployeeController {
 
     async findMany(req: Request, res: Response) {
         try {
-            const sorted = req.query.sorted as boolean | undefined
+            const sorted = req.query.sorted as string | undefined
 
             const response = await this.employeeService.findMany(sorted)
             res.status(200).json(response)

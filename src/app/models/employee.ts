@@ -24,7 +24,7 @@ const employeeSchema: Schema<EmployeeDocument> = new Schema({
         required: true,
         min: [2, "Employee actions is too short"]
     },
-}, { timestamps: true, validateBeforeSave: true },);
+}, { timestamps: true },);
 
 const Employee = mongoose.model<EmployeeDocument>("Employee", employeeSchema);
 

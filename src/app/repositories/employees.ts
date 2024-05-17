@@ -10,11 +10,13 @@ class EmployeesRepository {
         return await Employee.findOne({ name: name })
     }
 
-    async read(sorted: boolean | undefined): Promise<IEmployee[]> {
-        if(sorted) {
-            return await Employee.find().sort({ createdAt: 1 })
+    async read(sorted: string | undefined): Promise<IEmployee[]> {     
+        if (sorted === "true") {
+            return await Employee.find().sort({ name: 1 });
+        } else if (sorted === "false") {
+            return await Employee.find().sort({ name: -1 });
         } else {
-            return await Employee.find().sort({ createdAt: -1 })
+            return await Employee.find().sort({ name: 1 });
         }
     }
 
