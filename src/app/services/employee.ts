@@ -13,8 +13,8 @@ class EmployeeService {
     async create(data: IEmployee): Promise<any> {
         const exists = await this.newEmployeeRepository.readByName(data.name)
 
-        if(!data.actions || !data.charge || !data.department || !data.name) {
-            throw new AppError("You need to pass (name, charge, department and actions)", 400)
+        if(!data.admissionDate || !data.charge || !data.department || !data.name) {
+            throw new AppError("Todos os campos (admissionDate, charge, department, name) são obrigatórios", 400)
         }
 
         if(exists) {
@@ -67,8 +67,8 @@ class EmployeeService {
             throw new AppError("Invalid id", 400)
         }
         
-        if (!data.actions || !data.charge || !data.department || !data.name) {
-            throw new Error("Todos os campos (actions, charge, department, name) são obrigatórios");
+        if (!data.admissionDate || !data.charge || !data.department || !data.name) {
+            throw new Error("Todos os campos (admissionDate, charge, department, name) são obrigatórios");
         }
 
         const employee = await this.newEmployeeRepository.updateOne(id, data)

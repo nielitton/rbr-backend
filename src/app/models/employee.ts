@@ -7,22 +7,28 @@ const employeeSchema: Schema<EmployeeDocument> = new Schema({
     name: {
         type: String,
         required: true,
-        min: [2, "Employee name is too short"]
+        min: [2, "Nome é muito curto"]
     },
     charge: {
         type: String,
         required: true,
-        min: [2, "Employee charge is too short"]
+        min: [2, "Cargo é muito curto"]
     },
     department: {
         type: String,
         required: true,
-        min: [2, "Employee department is too short"]
+        min: [2, "Departamento é muito curto"]
     },
-    actions: {
-        type: String,
+    admissionDate: {
+        type: Date,
         required: true,
-        min: [2, "Employee actions is too short"]
+        validate: {
+            validator: (date: Date) => {
+                return !isNaN(date.getTime());
+            },
+            message: "Data de admissão inválida"
+        },
+        min: [2, "Data de admissão é muito curta"]
     },
 }, { timestamps: true },);
 

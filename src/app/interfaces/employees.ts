@@ -1,7 +1,7 @@
 export interface IEmployee {
     name: string;
     department: string;
-    actions: string;
+    admissionDate: Date;
     charge: string;
     createdAt: string
 }
