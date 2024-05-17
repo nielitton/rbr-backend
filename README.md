@@ -1,4 +1,4 @@
-# Teste para BRB Digital
+# Teste para RBR Digital
 
 Olá, aqui seguem instruções de instalação do backend para o teste técnico RBR Digital.
 
