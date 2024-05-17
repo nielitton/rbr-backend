@@ -29,7 +29,7 @@ Siga estas etapas para inicializar o projeto em sua máquina:
 
    ```bash
    DB_STRING="mongodb+srv://nielitonsousa3040:8GDdrKcUOKuI5CY2@cluster0.xyrqk8w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-   APP_PORT=3000
+   APP_PORT=3333
 
    isso irá lhe fornecer variáveis de ambiente para poder rodar o projeto.
 
