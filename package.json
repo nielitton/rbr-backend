@@ -3,19 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon --watch src --ext ts,json --exec node -r ts-node/register src/app/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "@types/mongoose": "^5.11.97",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "moongose": "^1.0.0"
+    "moongose": "^1.0.0",
+    "ts-mongoose": "^0.0.24",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
   }
 }
