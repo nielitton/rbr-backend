@@ -24,7 +24,7 @@ class EmployeeService {
         return await this.newEmployeeRepository.save(data);
     }
 
-    async findMany(sorted: string | undefined): Promise<IEmployee[]> {
+    async findMany(sorted: string | undefined): Promise<{employees: IEmployee[], count: number}> {
         return await this.newEmployeeRepository.read(sorted)
     }
 
