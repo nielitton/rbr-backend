@@ -10,23 +10,21 @@ class EmployeesRepository {
         return await Employee.findOne({ name: name })
     }
 
-    async read(sorted: string | undefined): Promise<{employees: IEmployee[], count: number}> {    
-        const count = await Employee.find().count()
-        
-        if (sorted === "true") {
-            const employees = await Employee.find().sort({ name: 1 });
-
-            return { employees, count }
-        } else if (sorted === "false") {
-            const employees = await Employee.find().sort({ name: -1 });
-
-            return { employees, count }
-        } else {
-            const employees = await Employee.find().sort({ name: 1 });
-
-            return { employees, count }
+    async read(sorted: string | undefined, searchTerm: string | undefined): Promise<{ employees: IEmployee[], count: number }> {
+        let query = Employee.find();
+    
+        if (searchTerm) {
+            query = query.find({ name: { $regex: searchTerm, $options: "i" } });
         }
+    
+        const employees = await query;
+    
+        const count = await Employee.countDocuments();
+    
+        return { employees, count };
     }
+    
+    
 
     async readOne(id: string): Promise<IEmployee | null> {
         return await Employee.findById(id) || null

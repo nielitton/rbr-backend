@@ -24,9 +24,10 @@ class EmployeeService {
         return await this.newEmployeeRepository.save(data);
     }
 
-    async findMany(sorted: string | undefined): Promise<{employees: IEmployee[], count: number}> {
-        return await this.newEmployeeRepository.read(sorted)
+    async findMany(sorted: string | undefined, searchTerm: string | undefined): Promise<{employees: IEmployee[], count: number}> {
+        return await this.newEmployeeRepository.read(sorted, searchTerm);
     }
+    
 
     async findOne(id: string): Promise<IEmployee | null> {
         const objectId = isValidObjectId(id)
