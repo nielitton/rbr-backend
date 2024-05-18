@@ -17,13 +17,18 @@ class EmployeesRepository {
             query = query.find({ name: { $regex: searchTerm, $options: "i" } });
         }
     
+        if (sorted === "true") {
+            query = query.sort({ name: 1 });
+        } else if (sorted === "false") {
+            query = query.sort({ name: -1 });
+        }
+    
         const employees = await query;
     
-        const count = await Employee.countDocuments();
+        const count = await Employee.countDocuments(searchTerm ? { name: { $regex: searchTerm, $options: "i" } } : {});
     
         return { employees, count };
     }
-    
     
 
     async readOne(id: string): Promise<IEmployee | null> {
